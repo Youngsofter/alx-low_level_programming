@@ -1,47 +1,29 @@
-int in_accept(char c, char *accept);
-
+#include "main.h"
+#include <stdio.h>
 /**
- * _strpbrk - searches a string for any of a set of bytes
- * @s: string to be checked
- * @accept: string containing the only accepted bytes
+ * _strpbrk - prints the consecutive caracters of s1 that are in s2.
+ * @s: source string
+ * @accept: searching string
  *
- * Return: a pointer to the byte in s that matches one of the bytes in accept,
- * or NULL if no such byte is found
+ * Return: new string.
  */
 char *_strpbrk(char *s, char *accept)
 {
-	unsigned int i;
-	char *first = NULL;
+	unsigned int i, j;
 
-	for (i = 0;  s[i] != '\0'; i++)
+	for (i = 0; *(s + i); i++)
 	{
-		if (in_accept(s[i], accept))
+		for (j = 0; *(accept + j); j++)
 		{
-			first = (s + i);
-			break;
+			if (*(s + i) == *(accept + j))
+			{
+				break;
+			}
+		}
+		if (*(accept + j) != '\0')
+		{
+			return (s + i);
 		}
 	}
-
-	return (first);
-}
-
-
-/**
- * in_accept - checks if agiven character is in the string accept
- * @c: character to be checked
- * @accept: string containingthe only accepted characters
- *
- * Return: 1 if c is in accept. Otherwise 0
- */
-int in_accept(char c, char *accept)
-{
-	int i;
-
-	for (i = 0; accept[i] != '\0'; i++)
-	{
-		if (c == accept[i])
-			return (1);
-	}
-
 	return (0);
 }
